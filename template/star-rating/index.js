@@ -1,6 +1,4 @@
-// do something!
-
-const StarRating = () => {
+const StarRating = ($container) => {
   const addStarRatingCSS = () => {
     const starRatingCSSPAth = 'star-rating/theme.css';
     const link = document.createElement('link');
@@ -14,19 +12,27 @@ const StarRating = () => {
   };
 
   const addStarRating = () => {
-    const stars = `
-      <div class='star-rating-container'>
-        <i class='bx bx-star'></i>
-        <i class='bx bx-star'></i>
-        <i class='bx bx-star'></i>
-        <i class='bx bx-star'></i>
-        <i class='bx bx-star'></i>
-      </div>
-    `;
+    const maxRating = parseInt($container.getAttribute('data-max-rating'));
 
-    document.querySelectorAll('.star-rating').forEach((container) => {
-      container.innerHTML = stars;
-    });
+    const starRatingContainer = document.createElement('div');
+    starRatingContainer.classList.add('star-rating-container');
+
+    const handleMouseEnter = () => {};
+
+    const handleMouseLeave = () => {
+      // console.log('out');
+    };
+
+    for (let i = 1; i <= maxRating; i++) {
+      const starIcon = document.createElement('i');
+      starIcon.classList.add('bx', 'bxs-star');
+
+      starRatingContainer.appendChild(starIcon);
+
+      starIcon.addEventListener('mouseenter', handleMouseEnter);
+      starIcon.addEventListener('mouseleave', handleMouseLeave);
+    }
+    $container.appendChild(starRatingContainer);
   };
 
   const init = () => {
