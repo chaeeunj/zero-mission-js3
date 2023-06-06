@@ -41,6 +41,22 @@ const StarRating = ($container) => {
       });
     };
 
+    const onClickStarIcon = (event) => {
+      const allStars = Array.from($container.querySelectorAll('i'));
+      const currentStar = event.target;
+
+      const currentStarIndex = allStars.indexOf(currentStar);
+      let currentRating = currentStarIndex + 1;
+
+      document.querySelectorAll('.current-rating > span').forEach((element) => {
+        element.innerHTML = `${currentRating}`;
+      });
+
+      allStars.slice(0, currentStarIndex + 1).forEach((star) => {
+        star.style.color = '#db5b33';
+      });
+    };
+
     for (let i = 1; i <= maxRating; i++) {
       const starIcon = document.createElement('i');
       starIcon.classList.add('bx', 'bxs-star');
